@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - name: Build & Run
-      uses: ./
+      uses: appleboy/ssh-action@master 
       with:
         ruby-version: 2.6
         host: ${{ secrets.HOST }}
