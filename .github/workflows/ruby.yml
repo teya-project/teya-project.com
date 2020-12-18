@@ -22,11 +22,11 @@ jobs:
     - name: Build & Run
       uses: appleboy/ssh-action@master 
       with:
-        ruby-version: 2.6
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SECRET_KEY }}
         port: ${{ secrets.PORT }}
         script: |
           cd ${{ secrets.DEV_PATH }}
-          ls -lah
+          git pull origin develop
+          systemctl restart nginx
