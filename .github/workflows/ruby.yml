@@ -36,7 +36,7 @@ jobs:
            secret_key_base: $SECRET
           EOL
           mkdir tmp/cache
-          chmod 777 -R tmp/
           RAILS_ENV=production rake db:migrate
           
           systemctl restart nginx
+          chmod -R 777 tmp/
