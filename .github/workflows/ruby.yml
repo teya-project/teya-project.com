@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Build & Run
       uses: ./
       with:
         ruby-version: 2.6
