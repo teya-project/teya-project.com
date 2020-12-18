@@ -27,6 +27,6 @@ jobs:
         key: ${{ secrets.SECRET_KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd ${{ secrets.DEV_PATH }}
-          git pull origin develop
+          cd ${{ secrets.MASTER_PATH }}
+          git pull origin master
           systemctl restart nginx
