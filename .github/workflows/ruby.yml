@@ -28,5 +28,15 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd ${{ secrets.MASTER_PATH }}
-          git pull origin master
+          git pull
+          bundle install
+          RAILS_ENV=production SECRET=`rake secret`
+          cat > config/secrets.yml << EOL
+          production:
+           secret_key_base: $SECRET
+          EOL
+          mkdir tmp/cache
+          chmod 777 -R tmp/
+          RAILS_ENV=production rake db:migrate
+          
           systemctl restart nginx
