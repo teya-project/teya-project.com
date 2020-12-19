@@ -1,0 +1,42 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+
+name: Ruby
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build & Run
+      uses: appleboy/ssh-action@master 
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SECRET_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd ${{ secrets.MASTER_PATH }}
+          git pull
+          bundle install
+          RAILS_ENV=production SECRET=`rake secret`
+          cat > config/secrets.yml << EOL
+          production:
+           secret_key_base: $SECRET
+          EOL
+          mkdir tmp/cache
+          RAILS_ENV=production rake db:migrate
+          
+          systemctl restart nginx
+          chmod -R 777 tmp/
