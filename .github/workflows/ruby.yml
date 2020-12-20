@@ -42,3 +42,4 @@ jobs:
           rake assets:precompile RAILS_ENV=production
           systemctl restart nginx
           chmod -R 777 tmp/
+          chown -R nginx:root ${{ secrets.MASTER_PATH }}
