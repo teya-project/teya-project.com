@@ -75,4 +75,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   #
   config.hosts << "beta.teya-project.com"
+  config.hosts << "0.0.0.0"
 end
