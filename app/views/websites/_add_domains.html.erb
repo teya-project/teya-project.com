@@ -1,7 +1,8 @@
-<%= form_with model: website do |form| %>
+<%= form_with url:add_domains_path, model: website do |form| %>
   <div>
     <%= form.label :domain_name %><br>
-    <%= form.url_field :domain_name %>
+    <%= form.text_area :domain_name, size: "70x15" %>
+
     <%= website.errors.full_messages_for(:domain_name).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -18,3 +19,5 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+

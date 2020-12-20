@@ -3,9 +3,16 @@
 <ul>
   <% @websites.each do |website| %>
     <li>
-      <%= link_to website.title, website %>
+      <%= link_to website.domain_name, website %>
     </li>
   <% end %>
 </ul>
-
-<%= link_to "New Website", new_website_path %>
+<h4>Functions</h4>
+<ul>
+  <li><%= link_to "New Website", new_website_path %></li>
+  <li><%= link_to "Add Multiple Domains", add_domains_path %></li>
+  <li><%= link_to "Update All Domains", update_all_path %></li>
+  <hr>
+  <li><%= link_to "Load Demo", load_demo_path %></li>
+  <li><%= link_to "Destroy All", destroy_all_path %></li>
+</ul>

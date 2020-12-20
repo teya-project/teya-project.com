@@ -1,4 +1,3 @@
 class Website < ApplicationRecord
-  validates :title, presence: true
-  validates :body, presence: true, length: { minimum: 10 }
+  validates :domain_name, presence: true, length: { minimum: 3 }
 end
