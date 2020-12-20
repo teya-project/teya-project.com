@@ -28,6 +28,8 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd ${{ secrets.MASTER_PATH }}
+          git add *
+          git stash
           git pull
           bundle install
           RAILS_ENV=production SECRET=`rake secret`
