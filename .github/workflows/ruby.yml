@@ -37,6 +37,6 @@ jobs:
           EOL
           mkdir tmp/cache
           RAILS_ENV=production rake db:migrate
-          
+          RAILS_ENV=production rake assets:precompile
           systemctl restart nginx
           chmod -R 777 tmp/
