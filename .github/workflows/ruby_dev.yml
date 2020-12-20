@@ -37,3 +37,5 @@ jobs:
           
           systemctl restart nginx
           chmod -R 777 tmp/
+          chown -R nginx:root ${{ secrets.DEV_PATH }}
+
