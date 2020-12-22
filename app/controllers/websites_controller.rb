@@ -134,8 +134,6 @@ class WebsitesController < ApplicationController
     @dump_path = './tmp/rkn_check/dump.csv'
     # Файлы из переменных ниже рекомендуется создать вручную, воспользовавшись sample-файлами
 
-    @tg_token = './tmp/rkn_check/tg_token.txt'
-    @chat_id_path = './tmp/rkn_check/chat_id.txt'
 
     # Проверяем актуальность дампа банов
     @saved_dump_date = File.read('./tmp/rkn_check/dump_date.txt')
@@ -186,10 +184,8 @@ class WebsitesController < ApplicationController
     logger.info "Домены в бане: #{@my_banned_domains_unicode}".red
 
     ### telegram message
-    token = File.read(@tg_token)
-    chat_id = File.read(@chat_id_path)
+    URI.open("https://api.telegram.org/bot1240696416:AAHBIc1sbWcFVFl5StjYYCByiV48VvZDmmo/sendMessage?chat_id=1215881056&text=%F0%9F%9A%AB+#{CGI.escape(x)}+was+banned+from+RKN")
     message = @my_banned_domains_unicode.each do |x|
-      URI.open("https://api.telegram.org/bot#{token}/sendMessage?chat_id=#{chat_id}&text=%F0%9F%9A%AB+#{CGI.escape(x)}+was+banned+from+RKN")
       puts "Забаненный домен #{x} отправлен в тг".red
       #sleep(3)
     end
