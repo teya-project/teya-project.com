@@ -39,3 +39,10 @@
 yarn-debug.log*
 .yarn-integrity
 /.idea/
+
+# tmp rkn_check_files
+!/tmp/rkn_check/
+/tmp/rkn_check/chat_id.txt
+/tmp/rkn_check/my_domains_ignore.txt
+/tmp/rkn_check/tg_token.txt
+/tmp/rkn_check/dump.csv

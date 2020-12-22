@@ -2,18 +2,12 @@
   <div>
     <%= form.label :domain_name %><br>
     <%= form.text_field :domain_name %>
-    <%= website.errors.full_messages_for(:domain_name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
   </div>
 
   <div>
-
-    <%= website.errors.full_messages_for(:domain_name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+    <%= form.label :rkn_status %><br>
+    <%= form.check_box :rkn_status %>
   </div>
-
   <div>
     <%= form.submit %>
   </div>

@@ -6,6 +6,7 @@
     <th scope="col">#</th>
     <th scope="col">Domain Name</th>
     <th scope="col">RKN status</th>
+    <th scope="col">IGNORE RKN check</th>
   </tr>
   </thead>
   <tbody>
@@ -13,7 +14,8 @@
     <tr>
       <th scope="row"><%= website.id %></th>
       <td><%= link_to website.domain_name, website %></td>
-      <td><span class="badge bg-danger">RKN</span></td>
+      <td><span class="badge bg-danger"><%= "BANNED" if website.rkn_status %></span></td>
+      <td><a href="<%= website_path(website) %>/rkn_ignore/"><span class="badge bg-dark"><%= "TRUE" if website.rkn_check_ignore %></span><span class="badge bg-light text-dark"><%= "FALSE" unless website.rkn_check_ignore %></span></a></td>
     </tr>
   <% end %>
   </tbody>
