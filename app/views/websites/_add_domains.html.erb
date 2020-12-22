@@ -2,17 +2,6 @@
   <div>
     <%= form.label :domain_name %><br>
     <%= form.text_area :domain_name, size: "70x15" %>
-
-    <%= website.errors.full_messages_for(:domain_name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-
-    <%= website.errors.full_messages_for(:domain_name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
   </div>
 
   <div>

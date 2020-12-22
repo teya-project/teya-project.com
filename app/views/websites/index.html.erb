@@ -1,12 +1,23 @@
 <h1>Websites</h1>
 
-<ul>
+<table class="table table-bordered table-hover" >
+  <thead class="table-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Domain Name</th>
+    <th scope="col">RKN status</th>
+  </tr>
+  </thead>
+  <tbody>
   <% @websites.each do |website| %>
-    <li>
-      <%= link_to website.domain_name, website %>
-    </li>
+    <tr>
+      <th scope="row"><%= website.id %></th>
+      <td><%= link_to website.domain_name, website %></td>
+      <td><span class="badge bg-danger">RKN</span></td>
+    </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>
 <h4>Functions</h4>
 <ul>
   <li><%= link_to "New Website", new_website_path %></li>

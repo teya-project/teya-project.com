@@ -29,14 +29,16 @@ class WebsitesController < ApplicationController
 
   def create_domains
 
+    @website = Website.new(domains_params)
+    domain_names = domains_params[:domain_name].split("\r\n").reject { |x| x == "" }.uniq
+    domains_collection = domain_names.each do |domain_name|
 
-    @website = Website.new(domains_params) #(title: "...", body: "...")
-    if @website.save
-      render json: @website
-      #redirect_to root_path
-    else
-      render :add_domains
+      @website = Website.insert_all( [
+                                       {id: :id, domain_name: "#{domain_name}", created_at: :created_at, updated_at: :updated_at }
+                                     ])
     end
+    render plain: domains_collection
+    #redirect_to root_path
 
   end
 
@@ -86,6 +88,6 @@ class WebsitesController < ApplicationController
   end
 
   def domains_params
-    params.require(:website).permit(:domain_name).yield_self { |x| { id: :id, domain_name: x.values[0], created_at: :created_at, updated_at: :updated_at } }
+    params.require(:website).permit(:domain_name)
   end
 end

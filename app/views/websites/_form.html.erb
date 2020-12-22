@@ -1,7 +1,7 @@
 <%= form_with model: website do |form| %>
   <div>
     <%= form.label :domain_name %><br>
-    <%= form.url_field :domain_name %>
+    <%= form.text_field :domain_name %>
     <%= website.errors.full_messages_for(:domain_name).each do |message| %>
       <div><%= message %></div>
     <% end %>
