@@ -22,6 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+Для корректной работы rkn_check.rb требуется библиотека libidn для вашей ОС.
+
+    macos:$ brew install libidn
+    centos8:$ yum install libidn-devel
+
 ## Style commits
 - `feat`: (new feature for the user, not a new feature for build script)
 - `fix`: (bug fix for the user, not a fix to a build script)
