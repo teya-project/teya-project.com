@@ -184,8 +184,9 @@ class WebsitesController < ApplicationController
     logger.info "Домены в бане: #{@my_banned_domains_unicode}".red
 
     ### telegram message
-    URI.open("https://api.telegram.org/bot1240696416:AAHBIc1sbWcFVFl5StjYYCByiV48VvZDmmo/sendMessage?chat_id=1215881056&text=%F0%9F%9A%AB+#{CGI.escape(x)}+was+banned+from+RKN")
+    # https://api.telegram.org/bot1240696416:AAHBIc1sbWcFVFl5StjYYCByiV48VvZDmmo/sendMessage?chat_id=1215881056&text=boo
     message = @my_banned_domains_unicode.each do |x|
+      URI.open("https://api.telegram.org/bot1240696416:AAHBIc1sbWcFVFl5StjYYCByiV48VvZDmmo/sendMessage?chat_id=1215881056&text=%F0%9F%9A%AB+#{CGI.escape(x)}+was+banned+from+RKN")
       puts "Забаненный домен #{x} отправлен в тг".red
       #sleep(3)
     end
