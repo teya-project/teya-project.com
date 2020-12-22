@@ -3,7 +3,6 @@
 <table class="table table-bordered table-hover" >
   <thead class="table-dark">
   <tr>
-    <th scope="col">#</th>
     <th scope="col">Domain Name</th>
     <th scope="col">RKN status</th>
     <th scope="col">IGNORE RKN check</th>
@@ -12,8 +11,7 @@
   <tbody>
   <% @websites.each do |website| %>
     <tr>
-      <th scope="row"><%= website.id %></th>
-      <td><%= link_to website.domain_name, website %></td>
+      <td><a href="/websites/<%= website.id %>"><%= Idna.to_unicode(website.domain_name) %></a></td>
       <td><span class="badge bg-danger"><%= "BANNED" if website.rkn_status %></span></td>
       <td><a href="<%= website_path(website) %>/rkn_ignore/"><span class="badge bg-dark"><%= "TRUE" if website.rkn_check_ignore %></span><span class="badge bg-light text-dark"><%= "FALSE" unless website.rkn_check_ignore %></span></a></td>
     </tr>
