@@ -42,3 +42,11 @@ yarn-debug.log*
 
 # tmp rkn_check_files
 !/tmp/rkn_check/
+
+# skote template
+!/public/assets/css/
+!/public/assets/fonts/
+!/public/assets/images/
+!/public/assets/js/
+!/public/assets/lang/
+!/public/assets/ibs/
