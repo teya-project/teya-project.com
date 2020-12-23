@@ -44,7 +44,7 @@
                   <div>
 
                     <p class="text-muted text-truncate mb-2">Need to unban</p>
-                    <h5 class="mb-0"><%= Website.where(rkn_status: 1, rkn_check_ignore: 0).count %> <%= n = Website.where(rkn_status: 1, rkn_check_ignore: 0).count; raw "<span style=\"margin-left: 10px; font-size:24px;\">🧨</span>" if n >= 1 %></h5>
+                    <h5 class="mb-0"><%= raw "<span style=\"color:#FF0000;\">#{Website.where(rkn_status: 1, rkn_check_ignore: 0).count}</span>" %> <%= n = Website.where(rkn_status: 1, rkn_check_ignore: 0).count; raw "<span style=\"margin-left: 10px;\">🧨</span>" if n >= 1 %></h5>
 
                   </div>
                 </div>
