@@ -1,124 +1,119 @@
-<!-- start page title -->
-<div class="row">
-  <div class="col-12">
-    <div class="page-title-box d-flex align-items-center justify-content-between">
-      <h1 class="mb-0 font-size-18">Websites</h1>
+<div class="container-fluid">
 
-      <div class="page-title-right">
-        <ol class="breadcrumb m-0">
-          <li class="breadcrumb-item"><a href="javascript: void(0);">Layouts</a></li>
-          <li class="breadcrumb-item active">Websites</li>
-        </ol>
-      </div>
 
-    </div>
-  </div>
-</div>
-<!-- end page title -->
-<div class="row">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg">
-            <div class="media">
-              <div class="mr-3">
-                <img src="/assets/images/users/avatar-1.jpg" alt="" class="avatar-md rounded-circle img-thumbnail">
-              </div>
-              <div class="media-body align-self-center">
-                <div class="text-muted">
-                  <p class="mb-2">Welcome to teya-project.com</p>
-                  <h5 class="mb-1">John Doe</h5>
-                </div>
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="card overflow-hidden">
+        <div class="bg-soft-primary">
+          <div class="row">
+            <div class="col-7">
+              <div class="text-primary p-3">
+                <h5 class="text-primary">Welcome Back !</h5>
+                <p>It will seem like simplified</p>
               </div>
             </div>
-          </div>
-
-          <div class="col-lg-4 align-self-center">
-            <div class="text-lg-center mt-4 mt-lg-0">
-              <div class="row">
-
-
-                <%= raw "<!--" if Website.where(rkn_status: 1, rkn_check_ignore: 0).count <= 0 %>
-                <div class="col">
-                  <div>
-
-                    <p class="text-muted text-truncate mb-2">Need to unban</p>
-                    <h5 class="mb-0"><%= raw "<span style=\"color:#000;\">#{Website.where(rkn_status: 1, rkn_check_ignore: 0).count}</span>" %> <%= n = Website.where(rkn_status: 1, rkn_check_ignore: 0).count; raw "<span style=\"margin-left: 10px;\">🧨</span>" if n >= 1 %></h5>
-
-                  </div>
-                </div>
-                <%= raw "-->" if Website.where(rkn_status: 1, rkn_check_ignore: 0).count <= 0 %>
-
-                <div class="col">
-                  <div>
-                    <p class="text-muted text-truncate mb-2">Total Banned</p>
-                    <h5 class="mb-0"><%= Website.where(rkn_status: 1).count %></h5>
-                  </div>
-                </div>
-
-                <div class="col">
-                  <div>
-                    <p class="text-muted text-truncate mb-2">Total Websites</p>
-                    <h5 class="mb-0"><%= @websites.count %></h5>
-                  </div>
-                </div>
-              </div>
+            <div class="col-5 align-self-end">
+              <img src="http://skote-h.laravel.themesbrand.com/assets/images/profile-img.png" alt="" class="img-fluid">
             </div>
           </div>
+        </div>
+        <div class="card-body pt-0">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="avatar-md profile-user-wid mb-4">
+                <img src="http://skote-h.laravel.themesbrand.com/assets/images/users/avatar-1.jpg" alt="" class="img-thumbnail rounded-circle">
+              </div>
+              <h5 class="font-size-15 text-truncate">admin</h5>
+              <p class="text-muted mb-0 text-truncate">teya-project.com</p>
+            </div>
 
-          <div class="col-lg-12 d-lg-block">
-            <div class="clearfix  mt-4 mt-lg-0">
-              <div class="dropdown ">
-                <button class="btn btn-block btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="bx bxs-cog align-middle mr-1"></i> Functions
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <a class="dropdown-item" href="<%= new_website_path %>">Add Domain</a>
-                  <a class="dropdown-item" href="<%= add_domains_path %>">Add Multiple Domains</a>
-                  <a class="dropdown-item" href="<%= update_all_path %>">Update All Domains</a>
-                  <hr>
-                  <a class="dropdown-item" href="<%= load_demo_path %>">Load Demo</a>
-                  <a class="dropdown-item" href="<%= destroy_all_path %>">Destroy All</a>
+            <div class="col-sm-8">
+              <div class="pt-4">
+
+                <div class="row">
+                  <div class="col-6">
+                    <h5 class="font-size-15"><%= @websites.count %></h5>
+                    <p class="text-muted mb-0">Websites</p>
+                  </div>
+                  <div class="col-6">
+                    <h5 class="font-size-15"><%= access_key = ENV["bw_access_key"]; secret_key = ENV["bw_secret_key"]; command = "curl -Ss -H \'X-Access-Key: #{access_key}\' -H \'X-Secret-Key: #{secret_key}\' -X GET \"https://api.betwinneraffiliates.com/v2/affiliates/wallets\""; affapi = `#{command}`; affapi = JSON.parse(affapi); "$ #{ if affapi['success'] == true then affapi['payload'].first['available_balance'] else "need api key" end }" %></h5>
+                    <p class="text-muted mb-0">BW Balance</p>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <a class="btn btn-primary waves-effect waves-light btn-sm" href="<%= update_all_path %>">Update All</a>
+                  <a class="btn btn-primary waves-effect waves-light btn-sm" href="<%= load_demo_path %>">Load Demo</a>
+                  <a class="btn btn-primary waves-effect waves-light btn-sm" href="<%= destroy_all_path %>">Destroy All</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- end row -->
       </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-body">
-        <h2 class="card-title mb-4">My Websites</h2>
-        <div class="table-responsive">
-          <table class="table table-centered table-nowrap mb-0">
-            <thead class="thead-light">
+      <!-- end card -->
+
+
+      <!-- end card -->
+
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Need to change domain (<%= Website.where(rkn_status: 1, rkn_check_ignore: 0).count %>)</h4>
+          <table>
+          <% Website.where(rkn_status: 1, rkn_check_ignore: 0).each do |website| %>
             <tr>
-              <th scope="col">Domain Name</th>
-              <th scope="col">IGNORE RKN check</th>
+              <td width="55%">
+              <a href="/websites/<%= website.id %>"><span class="font-size-14"><%= Idna.to_unicode(website.domain_name) %></span></a>
+                <%= a = Date.today; b = website.updated_at; "#{b}"  %>
+              </td>
+
+              <td width="45%" align="right">
+                <a href="<%= website_path(website) %>/rkn_ignore/"><span class="badge badge-soft-success font-size-12"><%= raw("<i class=\"bx bx-check-double font-size-16 align-middle mr-2\"></i> Done") unless website.rkn_check_ignore %></span></a>
+              </td>
             </tr>
-            </thead>
-            <tbody>
-            <% @websites.each do |website| %>
-              <tr>
-                <td><a href="/websites/<%= website.id %>"><span class="font-size-14"><%= Idna.to_unicode(website.domain_name) %></span></a> <%= raw "<img src=\"/assets/images/rkn.png\" width=\"17px\" style=\"margin-left: 10px\" title=\"Banned\">" if website.rkn_status %></td>
-                <td><a href="<%= website_path(website) %>/rkn_ignore/"><span class="badge badge-dark font-size-12"><%= "TRUE" if website.rkn_check_ignore %></span><span class="badge badge-soft-dark font-size-12"><%= "FALSE" unless website.rkn_check_ignore %></span></a></td>
-              </tr>
-            <% end %>
-            </tbody>
+          <% end %>
           </table>
-
         </div>
-
-        <!-- end table-responsive -->
       </div>
+      <!-- end card -->
+    </div>
 
+    <div class="col-xl-8">
+
+
+
+
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+          <div class="col xl-8">
+          <h2 class="mb-4">My Websites </h2>
+          </div>
+          <div class="col xl-4 text-sm-right">
+          <button onclick="location.href='<%= add_domains_path %>'" type="button" class="btn btn-primary w-xs"><i class="fas fa-plus "></i> Add Websites</button>
+          </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-centered table-nowrap mb-0">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">Domain Name</th>
+                <th scope="col">IGNORE RKN check</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @websites.each do |website| %>
+                <tr>
+                  <td><a href="/websites/<%= website.id %>"><span class="font-size-14"><%= Idna.to_unicode(website.domain_name) %></span></a> <%= raw "<img src=\"/assets/images/rkn.png\" width=\"17px\" style=\"margin-left: 10px\" title=\"Banned\">" if website.rkn_status %></td>
+                  <td><a href="<%= website_path(website) %>/rkn_ignore/"><span class="badge badge-dark font-size-12"><%= "TRUE" if website.rkn_check_ignore %></span><span class="badge badge-soft-dark font-size-12"><%= "FALSE" unless website.rkn_check_ignore %></span></a></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+  <!-- end row -->
 
+</div>

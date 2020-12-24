@@ -182,7 +182,7 @@ class WebsitesController < ApplicationController
     domain = Idna.to_unicode(domain)
     case type
     when 'rkn'
-      URI.open("https://api.telegram.org/bot1240696416:AAHBIc1sbWcFVFl5StjYYCByiV48VvZDmmo/sendMessage?chat_id=1215881056&text=%F0%9F%9A%AB+#{CGI.escape(domain)}+%D0%B2%20%D0%B1%D0%B0%D0%BD%D0%B5%20%D0%A0%D0%9A%D0%9D")
+      URI.open("https://api.telegram.org/#{ ENV["tg_key"] }/sendMessage?chat_id=#{ ENV["tg_chat_id"] }&text=%F0%9F%9A%AB+#{CGI.escape(domain)}+%D0%B2%20%D0%B1%D0%B0%D0%BD%D0%B5%20%D0%A0%D0%9A%D0%9D")
       puts "Забаненный домен #{domain} отправлен в тг".red
       sleep(1)
     when 'expired'
@@ -193,23 +193,32 @@ class WebsitesController < ApplicationController
   end
 
   def rkn_check
-    load_dump
+    #load_dump
     Website.where(domain_name: @banned_domains, rkn_check_ignore: 0).update(rkn_status: true)
     @my_banned_domains = []
     Website.where(rkn_status: 1, rkn_check_ignore: 0).map do |x|
       @my_banned_domains << x.domain_name
     end
-    @my_banned_domains.each do |domain|
-      telegram_message('rkn', domain)
+    @api_keys = true
+    if ENV["tg_key"].nil? || ENV["tg_chat_id"].nil?
+      @api_keys = false
+      logger.info "Не добавлены ключи api для работы с телеграм".green
+    else
+      @api_keys = true
+      @my_banned_domains.each do |domain|
+        telegram_message('rkn', domain)
+      end
+      logger.info "Забаненные домены отправлены в телеграм".green
     end
-    logger.info "Забаненные домены отправлены в телеграм".green
+
   end
 
 
 
   def update_all
     rkn_check
-    redirect_to root_path
+    redirect_to root_path if @api_keys
+    render plain: 'Информация обновлена, но не добавлены ключи api для работы с телеграм' if !@api_keys
   end
 
   private

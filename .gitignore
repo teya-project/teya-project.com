@@ -50,3 +50,4 @@ yarn-debug.log*
 # tmp rkn_check_files
 !/tmp/rkn_check/
 
+/.env
