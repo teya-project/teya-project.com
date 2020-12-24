@@ -1,6 +1,6 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
+<!--This README would normally document whatever steps are necessary to get the
 application up and running.
 
 Things you may want to cover:
@@ -22,11 +22,13 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-
-Для корректной работы rkn_check.rb требуется библиотека libidn для вашей ОС.
-
+-->
+For correct runing this app u need
+1. install libidn for your system.
+---
     macos:$ brew install libidn
     centos8:$ dnf --enablerepo=PowerTools install libidn-devel
+2. create /.env file in your root directory from /.env_sample. Just add api keys.
 
 ## Style commits
 - `feat`: (new feature for the user, not a new feature for build script)
