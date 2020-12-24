@@ -193,7 +193,7 @@ class WebsitesController < ApplicationController
   end
 
   def rkn_check
-    #load_dump
+    load_dump
     Website.where(domain_name: @banned_domains, rkn_check_ignore: 0).update(rkn_status: true)
     @my_banned_domains = []
     Website.where(rkn_status: 1, rkn_check_ignore: 0).map do |x|
