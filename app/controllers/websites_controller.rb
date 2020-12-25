@@ -131,7 +131,7 @@ class WebsitesController < ApplicationController
 
   def destroy
     @website = Website.find(params[:id])
-    @website.destroy
+    #@website.destroy
 
     redirect_to root_path
   end
