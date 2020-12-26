@@ -131,7 +131,7 @@ class WebsitesController < ApplicationController
 
   def destroy
     @website = Website.find(params[:id])
-    #@website.destroy
+    @website.destroy
 
     redirect_to root_path
   end
@@ -213,12 +213,33 @@ class WebsitesController < ApplicationController
 
   end
 
+  def whois_check
+    #Website.where(domain_name: @banned_domains, rkn_check_ignore: 0).update(rkn_status: true)
+    @websites = Website.all
+
+    Website.where(domain_expires_date: nil).each do |website|
+      #website.update(domain_expires_date: '2020-12-22 20:01:12 UTC')
+      whois_info = URI.open("http://whois7.ru/api/?q=#{website.domain_name}&clean").read
+      expires_date_json = JSON.parse(whois_info)
+      #expires_date = Time.at(JSON.parse(whois_info)['expires']).to_datetime
+      if expires_date_json['expires']
+        expires_date = Time.at(expires_date_json['expires']).to_datetime
+        website.update(domain_expires_date: "#{expires_date}")
+      else
+        website.update(domain_expires_date: "unknown")
+
+      end
+      sleep(1)
+    end
+  end
 
 
   def update_all
-    rkn_check
-    redirect_to root_path if @api_keys
-    render plain: 'Информация обновлена, но не добавлены ключи api для работы с телеграм' if !@api_keys
+    #rkn_check
+    whois_check
+    redirect_to root_path
+    #redirect_to root_path if @api_keys
+    #render plain: 'Информация обновлена, но не добавлены ключи api для работы с телеграм' if !@api_keys
   end
 
   private

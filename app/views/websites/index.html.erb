@@ -57,36 +57,53 @@
 
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title mb-4">Need to change domain (<%= Website.where(rkn_status: 1, rkn_check_ignore: 0).count %>)</h4>
+          <h4 class="card-title mb-4">Need renew domain (<%= Website.where(rkn_status: 1, rkn_check_ignore: 0).count %>)</h4>
           <table>
-          <% Website.where(rkn_status: 1, rkn_check_ignore: 0).each do |website| %>
-            <tr>
+            <tbody><tr>
               <td width="55%">
-              <a href="/websites/<%= website.id %>"><span class="font-size-14"><%= Idna.to_unicode(website.domain_name) %></span></a>
-                <%= a = Date.today; b = website.updated_at; "#{b}"  %>
+                <a href="/websites/3"><span class="font-size-14">1xbet.com</span></a>
+                2020-12-26 06:21:09 UTC
               </td>
 
               <td width="45%" align="right">
-                <a href="<%= website_path(website) %>/rkn_ignore/"><span class="badge badge-soft-success font-size-12"><%= raw("<i class=\"bx bx-check-double font-size-16 align-middle mr-2\"></i> Done") unless website.rkn_check_ignore %></span></a>
+                <a href="/websites/3/rkn_ignore/"><span class="badge badge-soft-success font-size-12"><i class="bx bx-check-double font-size-16 align-middle mr-2"></i> Done</span></a>
               </td>
             </tr>
-          <% end %>
+            </tbody>
           </table>
         </div>
       </div>
       <!-- end card -->
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Need to change domain (<%= Website.where(rkn_status: 1, rkn_check_ignore: 0).count %>)</h4>
+          <table>
+            <% Website.where(rkn_status: 1, rkn_check_ignore: 0).each do |website| %>
+              <tr>
+                <td width="55%">
+                  <a href="/websites/<%= website.id %>"><span class="font-size-14"><%= Idna.to_unicode(website.domain_name) %></span></a>
+                  <%= a = Date.today; b = website.updated_at; "#{b}"  %>
+                </td>
+
+                <td width="45%" align="right">
+                  <a href="<%= website_path(website) %>/rkn_ignore/"><span class="badge badge-soft-success font-size-12"><%= raw("<i class=\"bx bx-check-double font-size-16 align-middle mr-2\"></i> Done") unless website.rkn_check_ignore %></span></a>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+      <!-- end card -->
+
     </div>
 
     <div class="col-xl-8">
-
-
-
 
       <div class="card">
         <div class="card-body">
           <div class="row">
           <div class="col xl-8">
-          <h2 class="mb-4">My Websites </h2>
+          <h2 class="mb-4">My Websites</h2>
           </div>
           <div class="col xl-4 text-sm-right">
           <button onclick="location.href='<%= add_domains_path %>'" type="button" class="btn btn-primary w-xs"><i class="fas fa-plus "></i> Add Websites</button>
@@ -97,13 +114,15 @@
               <thead class="thead-light">
               <tr>
                 <th scope="col">Domain Name</th>
-                <th scope="col">IGNORE RKN check</th>
+                <th scope="col">To expiration</th>
+                <th width="10%">RKN check OFF</th>
               </tr>
               </thead>
               <tbody>
               <% @websites.each do |website| %>
                 <tr>
                   <td><a href="/websites/<%= website.id %>"><span class="font-size-14"><%= Idna.to_unicode(website.domain_name) %></span></a> <%= raw "<img src=\"/assets/images/rkn.png\" width=\"17px\" style=\"margin-left: 10px\" title=\"Banned\">" if website.rkn_status %></td>
+                  <td><%= if website.domain_expires_date == nil then raw "<span class=\"badge badge-soft-dark font-size-12\">nil</span>" elsif (website.domain_expires_date == "unknown") then raw "<span class=\"badge badge-soft-dark font-size-12\">unknown</span>" else (Date.parse(website.domain_expires_date).to_date - Date.today.to_date).to_i end  %></td>
                   <td><a href="<%= website_path(website) %>/rkn_ignore/"><span class="badge badge-dark font-size-12"><%= "TRUE" if website.rkn_check_ignore %></span><span class="badge badge-soft-dark font-size-12"><%= "FALSE" unless website.rkn_check_ignore %></span></a></td>
                 </tr>
               <% end %>

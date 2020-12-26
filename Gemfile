@@ -57,3 +57,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'colorize'
 gem 'idna'
 gem 'dotenv-rails'
+#gem 'whois'
+#gem 'whois-parser'
