@@ -4,6 +4,8 @@ require 'json'
 require 'csv'
 require 'colorize'
 require 'idna'
+require 'json'
+
 
 class WebsitesController < ApplicationController
 
@@ -11,6 +13,30 @@ class WebsitesController < ApplicationController
 
   def index
     @websites = Website.all
+
+    # @expired_domains = []
+    # Website.where(rkn_status: 1).each do |website|
+    #   if (Date.parse(website.domain_expires_date).to_date - Date.today.to_date).to_i < 30
+    #     @expired_domains << website.domain_name
+    #   end
+    # end
+    #@expired_domains = []
+    @websites.each do |website|
+      if website.domain_expires_date != nil
+        days_to_expire = (website.domain_expires_date.to_date - Date.today).to_i
+        # @expired_domains['id'] = website.id
+        # @expired_domains['domain'] = website.domain_name
+        # @expired_domains['expires'] = days_to_expire
+
+
+
+      end
+
+    end
+
+    #render json: @expired_domains
+    # (website.domain_expires_date.to_date - Date.today.to_date).to_i
+
   end
   def show
     @website = Website.find(params[:id])
@@ -221,10 +247,12 @@ class WebsitesController < ApplicationController
       #website.update(domain_expires_date: '2020-12-22 20:01:12 UTC')
       whois_info = URI.open("http://whois7.ru/api/?q=#{website.domain_name}&clean").read
       expires_date_json = JSON.parse(whois_info)
+
       #expires_date = Time.at(JSON.parse(whois_info)['expires']).to_datetime
       if expires_date_json['expires']
         expires_date = Time.at(expires_date_json['expires']).to_datetime
         website.update(domain_expires_date: "#{expires_date}")
+
       else
         website.update(domain_expires_date: "unknown")
 
