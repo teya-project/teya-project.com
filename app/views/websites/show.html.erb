@@ -3,7 +3,8 @@
 
 <ul>
   <li><%= link_to "Edit", edit_website_path(@website) %></li>
-  <li><%= link_to "Destroy", website_path(@website),
+  <!--<li><#%= link_to "Destroy", website_path(@website),
                   method: :delete,
-                  data: { confirm: "Are you sure?" } %></li>
+                  data: { confirm: "Are you sure?" } %></li>-->
+  <li><a href="/websites/<%= @website.id %>/destroy/">destroy</a></li>
 </ul>

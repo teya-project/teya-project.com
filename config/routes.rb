@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/update_all", to: "websites#update_all"
   get "/destroy_all", to: "websites#destroy_all"
   get "/load_demo", to: "websites#load_demo"
-
+  get "/websites/:id/destroy", to: "websites#destroy"
   resources :websites
   get "/websites/:id/rkn_ignore", to: "websites#rkn_ignore"
 
