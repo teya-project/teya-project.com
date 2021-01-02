@@ -213,6 +213,22 @@ class WebsitesController < ApplicationController
     end
   end
 
+  def whois_update
+    @website = Website.find(params[:id])
+
+    whois_info = URI.parse(URI.escape("http://whois7.ru/api/?q=#{@website.domain_name}&clean")).read
+    expires_date_json = JSON.parse(whois_info)
+
+    if expires_date_json['expires']
+      expires_date = Time.at(expires_date_json['expires']).to_datetime
+      @website.update(domain_expires_date: "#{expires_date}")
+      logger.info "domain_expires_date: #{@website.domain_expires_date}".green
+    else
+      @website.update(domain_expires_date: "unknown")
+      logger.info "domain_expires_date: 'unknown'".red
+    end
+    redirect_to root_path
+  end
 
   def update_all
     #rkn_check
@@ -224,7 +240,7 @@ class WebsitesController < ApplicationController
 
   private
   def website_params
-    params.require(:website).permit(:domain_name, :rkn_status, :rkn_check_ignore)
+    params.require(:website).permit(:domain_name, :rkn_status, :rkn_check_ignore, :domain_expires_date)
   end
 
   def domains_params

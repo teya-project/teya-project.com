@@ -1,13 +1,19 @@
 
 <%= form_with model: website do |form| %>
   <div>
-    <%= form.label :domain_name %><br>
+    <%= form.label :domain_name %>:
     <%= form.text_field :domain_name %>
   </div>
 
   <div>
-    <%= form.label :rkn_status %><br>
+    <%= form.label :rkn_status %>:
     <%= form.check_box :rkn_status %>
+
+  </div>
+  <div>
+    domain_expires_date:
+  <%= form.text_field :domain_expires_date %>
+    (example: 2022-12-27 05:00:00 UTC)
   </div>
   <div>
     <%= form.submit %>

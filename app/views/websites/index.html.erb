@@ -68,10 +68,10 @@
 
                 </td>
                 <td width="45%">
-                  <%= (website.domain_expires_date.to_date - Date.today).to_i  %> days to exp
+                  <%= (website.domain_expires_date.to_date - Date.today).to_i  %> d to exp
                 </td>
                 <td align="right">
-                  <a href="<%= website_path(website) %>/rkn_ignore/"><span class="badge badge-soft-success font-size-12"><%= raw("<i class=\"bx bx-check-double font-size-16 align-middle mr-2\"></i> check again") unless website.rkn_check_ignore %></span></a>
+                  <a href="/websites/<%= website.id %>/whois_update/"><span class="badge badge-soft-success font-size-12"><%= raw("<i class=\"bx bx-check-double font-size-16 align-middle mr-2\"></i> recheck") unless website.rkn_check_ignore %></span></a>
                 </td>
               </tr>
             <% end %>
@@ -101,7 +101,7 @@
                   <a href="/websites/<%= website.id %>/edit"><span class="font-size-14"><%= Idna.to_unicode(website.domain_name) %></span></a>
                 </td>
                 <td width="45%">
-                  <%= (Date.today - website.updated_at.to_date).to_i  %> days ago
+                  <%= (Date.today - website.updated_at.to_date).to_i  %> d ago
                 </td>
                 <td width="" align="right">
                   <a href="<%= website_path(website) %>/rkn_ignore/"><span class="badge badge-soft-success font-size-12"><%= raw("<i class=\"bx bx-check-double font-size-16 align-middle mr-2\"></i> done") unless website.rkn_check_ignore %></span></a>

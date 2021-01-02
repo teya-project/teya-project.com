@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "/websites/:id/destroy", to: "websites#destroy"
   resources :websites
   get "/websites/:id/rkn_ignore", to: "websites#rkn_ignore"
+  get "/websites/:id/whois_update", to: "websites#whois_update"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
