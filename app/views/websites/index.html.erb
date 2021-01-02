@@ -71,7 +71,7 @@
                   <%= (website.domain_expires_date.to_date - Date.today).to_i  %> d to exp
                 </td>
                 <td align="right">
-                  <a href="/websites/<%= website.id %>/whois_update/"><span class="badge badge-soft-success font-size-12"><%= raw("<i class=\"bx bx-check-double font-size-16 align-middle mr-2\"></i> recheck") unless website.rkn_check_ignore %></span></a>
+                  <a href="/websites/<%= website.id %>/whois_update/"><span class="badge badge-soft-success font-size-12"><%= raw("<i class=\"bx bx-check-double font-size-16 align-middle mr-2\"></i> recheck") %></span></a>
                 </td>
               </tr>
             <% end %>
