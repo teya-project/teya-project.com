@@ -231,11 +231,11 @@ class WebsitesController < ApplicationController
   end
 
   def update_all
-    #rkn_check
+    rkn_check
     whois_check
-    redirect_to root_path
-    #redirect_to root_path if @api_keys
-    #render plain: 'Информация обновлена, но не добавлены ключи api для работы с телеграм' if !@api_keys
+    #redirect_to root_path
+    redirect_to root_path if @api_keys
+    render plain: 'Информация обновлена, но не добавлены ключи api для работы с телеграм' if !@api_keys
   end
 
   private
