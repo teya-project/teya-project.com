@@ -177,9 +177,8 @@ class WebsitesController < ApplicationController
     load_dump
     Website.where(domain_name: @banned_domains, rkn_check_ignore: 0).update(rkn_status: true)
     @my_banned_domains = []
-    Website.where(rkn_status: 1, rkn_check_ignore: 0).map do |x|
-      @my_banned_domains << x.domain_name
-    end
+    Website.where(rkn_status: 1, rkn_check_ignore: 0, submitted_to_tg: nil).map { |x| @my_banned_domains << x.domain_name }
+    Website.where(rkn_status: 1, rkn_check_ignore: 0, submitted_to_tg: nil).update(submitted_to_tg: true)
     @api_keys = true
     if ENV["tg_key"].nil? || ENV["tg_chat_id"].nil?
       @api_keys = false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_26_085936) do
+ActiveRecord::Schema.define(version: 2021_01_02_082051) do
 
   create_table "websites", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2020_12_26_085936) do
     t.boolean "rkn_status"
     t.boolean "rkn_check_ignore"
     t.datetime "domain_expires_date"
+    t.boolean "submitted_to_tg"
   end
 
 end
