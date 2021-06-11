@@ -36,7 +36,7 @@
                     <p class="text-muted mb-0">Websites</p>
                   </div>
                   <div class="col-6">
-                    <h5 class="font-size-15"><%= access_key = ENV["bw_access_key"]; secret_key = ENV["bw_secret_key"]; command = "curl -Ss -H \'X-Access-Key: #{access_key}\' -H \'X-Secret-Key: #{secret_key}\' -X GET \"https://api.betwinneraffiliates.com/v2/affiliates/wallets\""; affapi = `#{command}`; affapi = JSON.parse(affapi); "$ #{ if affapi['success'] == true then affapi['payload'].first['available_balance'] else "need api key" end }" %></h5>
+                    <h5 class="font-size-15"> <#%= access_key = ENV["bw_access_key"]; secret_key = ENV["bw_secret_key"]; command = "curl -Ss -H \'X-Access-Key: #{access_key}\' -H \'X-Secret-Key: #{secret_key}\' -X GET \"https://api.betwinneraffiliates.com/v2/affiliates/wallets\""; affapi = `#{command}`; affapi = JSON.parse(affapi); "$ #{ if affapi['success'] == true then affapi['payload'].first['available_balance'] else "need api key" end }" %></h5>
                     <p class="text-muted mb-0">BW Balance</p>
                   </div>
                 </div>
